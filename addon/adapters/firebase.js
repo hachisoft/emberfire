@@ -713,7 +713,7 @@ export default DS.Adapter.extend(Waitable, {
       }
 
       let parentRel = parent._relationships.get(rel.inverseKey);
-      if (this.isRelationshipEmbedded(this.store, parent.type.modelName, parentRel.relationshipMeta)) {
+      if (this.isRelationshipEmbedded(this.store, parent.modelName, parentRel.relationshipMeta)) {
         embeddingParentRel = rel;
         break;
       }
