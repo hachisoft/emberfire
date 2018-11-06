@@ -455,7 +455,7 @@ export default DS.Adapter.extend(Waitable, {
             const data = relationshipToSave.data;
             const relationship = relationshipToSave.relationship;
             if (relationshipToSave.hasMany) {
-              return this._saveHasManyRelationship(store, typeClass, relationship, data, recordRef, recordCache);
+              return this._saveHasManyRelationship(store, typeClass, relationship, data, recordRef, recordCache, snapshot);
             } else {
               // embedded belongsTo, we need to fill in the informations.
               if (relationshipToSave.isEmbedded) {
@@ -503,7 +503,7 @@ export default DS.Adapter.extend(Waitable, {
    * Call _saveHasManyRelationshipRecord on each record in the relationship
    * and then resolve once they have all settled
    */
-  _saveHasManyRelationship(store, typeClass, relationship, ids, recordRef, recordCache) {
+  _saveHasManyRelationship(store, typeClass, relationship, ids, recordRef, recordCache, parentSnapshot) {
     if (!Ember.isArray(ids)) {
       throw new Error('hasMany relationships must must be an array');
     }
@@ -522,7 +522,7 @@ export default DS.Adapter.extend(Waitable, {
     });
 
     dirtyRecords = uniq(dirtyRecords.concat(addedRecords)).map((id) => {
-      return this._saveHasManyRecord(store, typeClass, relationship, recordRef, id);
+      return this._saveHasManyRecord(store, typeClass, relationship, recordRef, id, parentSnapshot);
     });
 
     // Removed
@@ -560,13 +560,13 @@ export default DS.Adapter.extend(Waitable, {
    * named with the record id and update the value to the serialized
    * version of the record
    */
-  _saveHasManyRecord(store, typeClass, relationship, parentRef, id) {
+  _saveHasManyRecord(store, typeClass, relationship, parentRef, id, parentSnapshot) {
     const serializer = store.serializerFor(typeClass.modelName);
     var ref = this._getRelationshipRef(parentRef, serializer.keyForRelationship(relationship.key), id);
     var record = store.peekRecord(relationship.type, id);
     var isEmbedded = this.isRelationshipEmbedded(store, typeClass.modelName, relationship);
     if (isEmbedded) {
-      return record.save();
+      return record.save({parentSnapshot.adapterOptions});
     }
 
     return toPromise(ref.set, ref,  [true]);
