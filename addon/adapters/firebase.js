@@ -566,7 +566,10 @@ export default DS.Adapter.extend(Waitable, {
     var record = store.peekRecord(relationship.type, id);
     var isEmbedded = this.isRelationshipEmbedded(store, typeClass.modelName, relationship);
     if (isEmbedded) {
-      return record.save({parentSnapshot.adapterOptions});
+      return record.save(
+        {
+          adapterOptions: parentSnapshot.adapterOptions
+        });
     }
 
     return toPromise(ref.set, ref,  [true]);
