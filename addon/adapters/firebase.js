@@ -834,7 +834,12 @@ export default DS.Adapter.extend(Waitable, {
           cache[key] = Ember.A();
         } else {
           const isEmbedded = this.isRelationshipEmbedded(store, typeClass.modelName, relationship);
-          if (isEmbedded) {
+          let inverseNull = false;
+          if (relationship.meta && relationship.meta.options && relationship.meta.options.inverse === null)
+          {
+            inverseNull = true;
+          }
+          if (isEmbedded && !inverseNull) {
             const relationshipTypeClass = store.modelFor(relationship.type);
             for (let id in relationshipPayload) {
               let obj = relationshipPayload[id];
