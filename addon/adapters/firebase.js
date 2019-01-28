@@ -686,7 +686,7 @@ export default DS.Adapter.extend(Waitable, {
       return recordRef;
     }
 
-    return this._getCollectionRef(record.type, record.id);
+    return this._getCollectionRef(record, record.id);
   },
 
 
