@@ -46,9 +46,13 @@ export default DS.JSONSerializer.extend(DS.EmbeddedRecordsMixin, {
     var attributes = this._super(modelClass, resourceHash);
 
     // nullify omitted attributes
-    modelClass.eachAttribute((key) => {
+    modelClass.eachAttribute((key, meta) => {
       if (!attributes.hasOwnProperty(key)) {
-        attributes[key] = null;
+        if (meta && meta.options && meta.options.defaultValue != undefined) {
+          attributes[key] = meta.options.defaultValue;
+        } else {
+          attributes[key] = null;
+        }
       }
     });
 
