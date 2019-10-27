@@ -699,8 +699,8 @@ export default DS.Adapter.extend(Waitable, {
   getFirstEmbeddingParent(internalModel) {
     let relationships = assign(
       {},
-      internalModel._implicitRelationships,
-      internalModel._relationships.initializedRelationships
+      internalModel.__recordData.__implicitRelationships,
+      internalModel.__recordData.__relationships.initializedRelationships
     );
 
     let embeddingParentRel;
@@ -715,7 +715,7 @@ export default DS.Adapter.extend(Waitable, {
         continue;
       }
 
-      let parentRel = parent._relationships.get(rel.inverseKey);
+      let parentRel = parent.__relationships.get(rel.inverseKey);
       if (this.isRelationshipEmbedded(this.store, parent.modelName, parentRel.relationshipMeta)) {
         embeddingParentRel = rel;
         break;
@@ -725,7 +725,7 @@ export default DS.Adapter.extend(Waitable, {
     if (embeddingParentRel) {
       var parent = embeddingParentRel.members.toArray()[0];
       var parentKey = embeddingParentRel.inverseKey;
-      var parentRel = parent._relationships.get(parentKey).relationshipMeta;
+      var parentRel = parent.__relationships.get(parentKey).relationshipMeta;
       return { record: parent, relationship: parentRel };
     }
   },
