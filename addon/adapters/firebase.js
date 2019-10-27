@@ -699,6 +699,7 @@ export default DS.Adapter.extend(Waitable, {
   getFirstEmbeddingParent(internalModel) {
     if (!internalModel) return undefined;
     if (!internalModel.__recordData) return undefined;
+    if (!internalModel.__recordData.__relationships) return undefined;
 
     let relationships = assign(
       {},
