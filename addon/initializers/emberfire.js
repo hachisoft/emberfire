@@ -38,7 +38,7 @@ export default {
 
     // Monkeypatch the store until ED gives us a good way to listen to push events
     if (!DS.Store.prototype._emberfirePatched) {
-      DS.Store.reopen({
+      DS.Store.prototype.reopen({
         _emberfirePatched: true,
 
         _emberfireHandleRecordPush(records) {
