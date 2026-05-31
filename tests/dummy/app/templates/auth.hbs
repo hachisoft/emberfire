@@ -7,14 +7,14 @@
     <button class="auth-as-facebook" {{action "signIn" "facebook" redirect}}>Sign in with Facebook</button>
     <button class="auth-as-google"   {{action "signIn" "google" redirect}}>Sign in with Google</button>
   </div>
-  <div>Redirect? {{input type="checkbox" checked=redirect}}</div>
+  <div>Redirect? <input type="checkbox" checked={{redirect}} /></div>
   <div>
-    {{input type="text" value=email placeholder="email"}}
-    {{input type="text" value=password placeholder="password"}}
+    <input type="text" value={{email}} placeholder="email"/>
+    <input type="text" value={{password}} placeholder="password"/>
     <button class="auth-as-password" {{action "signIn" "password" email password}}>Sign in with Email</button>
   </div>
   <div>
-    {{input type="text" value=token placeholder="token"}}
+    <input type="text" value={{token}} placeholder="token"/>
     <button class="auth-as-custom" {{action "signIn" "custom" token}}>Sign in with Token</button>
   </div>
   <div>

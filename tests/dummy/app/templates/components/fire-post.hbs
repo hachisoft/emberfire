@@ -27,8 +27,8 @@
       </li>
     {{/each}}
     <li class="post-comment post-comment-new">
-      {{input value=commentUsername placeholder="Username"}}
-      {{textarea value=commentBody placeholder="Contribute to the conversation"}}
+      <input value={{commentUsername}} placeholder="Username"/>
+      <textarea value={{commentBody}} placeholder="Contribute to the conversation"/>
       <button {{action "publishComment"}}>Publish</button>
     </li>
   </ul>

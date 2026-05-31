@@ -6,8 +6,6 @@
     </div>
   </div>
   <h3 class="post-slug-title">
-    {{#link-to "post" post}}
-      {{post.title}}
-    {{/link-to}}
+    <LinkTo @route="post" @model={{post}}>{{post.title}}</LinkTo>
   </h3>
 </div>

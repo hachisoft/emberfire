@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   init: function() {
+    this._super.init && this._super.init.apply(this, arguments);
     this.set('post',  Ember.Object.create());
   },
   postIsValid: function() {

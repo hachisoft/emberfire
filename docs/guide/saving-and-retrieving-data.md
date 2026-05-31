@@ -27,10 +27,10 @@ This will generate a route and template for posts
 <h2>New Post</h2>
 <ul class="post-publish">
   <li>
-    {{input value=title placeholder="Title"}}
+    <input value={{title}} placeholder="Title"/>
   </li>
   <li>
-    {{textarea value=body placeholder="Body"}}
+    <textarea value={{body}} placeholder="Body"/>
   </li>
   <li>
     <button {{action "publishPost"}}>Publish</button>

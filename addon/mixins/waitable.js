@@ -3,7 +3,8 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
 
   init() {
-    this._super.apply(this, arguments);
+    this._super.init && this._super.init.apply(this, arguments);
+    // this._super.apply(this, arguments);
     // unresolved requests, used in testing
     this._reasons = 0;
 

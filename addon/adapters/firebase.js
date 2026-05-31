@@ -60,7 +60,8 @@ export default DS.Adapter.extend(Waitable, {
    * @constructor
    */
   init() {
-    this._super.apply(this, arguments);
+    this._super.init && this._super.init.apply(this, arguments);
+    // this._super.apply(this, arguments);
 
     var ref = this.get('firebase');
     if (!ref) {

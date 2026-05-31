@@ -14,9 +14,9 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
   app.import('bower_components/normalize-css/normalize.css');
-  app.import('bower_components/moment/moment.js');
+  app.import('node_modules/moment/moment.js');
 
-  app.import('bower_components/blueimp-md5/js/md5.js');
+  app.import('node_modules/blueimp-md5/js/md5.js');
   app.import('vendor/markdown/markdown.js');
 
   return app.toTree();
